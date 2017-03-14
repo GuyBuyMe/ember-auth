@@ -1,9 +1,32 @@
 {
-  "name": "ember-simple-auth",
+  "name": "ember-auth",
+
+  "version": "1.13.11",
+  "homepage": "https://github.com/igorgoroshit/ember-auth",
+  
+  "authors": [
+    "Igor Goroshit <igor@webt.co.il>"
+  ],
+  
+  "description": "Ember Auth",
+  
+  "main": "",
+  
+  "keywords": [
+    "ember-addon"
+  ],
+  
   "dependencies": {
-    "base64": "~1.0.0",
-    "bootstrap": "~3.3.7",
-    "pretender": "~1.1.0",
-    "sinonjs": "~1.17.1"
-  }
+    "ember": "1.13.11"
+  },
+
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
