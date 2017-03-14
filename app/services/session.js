@@ -1,3 +1,3 @@
-import SessionService from 'ember-simple-auth/services/session';
+import SessionService from 'ember-auth/services/session';
 
 export default SessionService;
