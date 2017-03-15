@@ -1,8 +1,9 @@
 /* global localStorage */
 import Ember from 'ember';
-import Base from 'ember-simple-auth/session-stores/base';
-import LocalStorage from 'ember-simple-auth/session-stores/local-storage';
-import Cookie from 'ember-simple-auth/session-stores/cookie';
+import Base from 'ember-auth/session-stores/base';
+import LocalStorage from 'ember-auth/session-stores/local-storage';
+import Cookie from 'ember-auth/session-stores/cookie';
+import getOwner from 'ember-auth/getOwner';
 
 const { computed, inject: { service }, getOwner } = Ember;
 

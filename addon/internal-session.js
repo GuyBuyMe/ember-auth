@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import getOwner from './../utils/getOwner';
 
 const {
   RSVP,
@@ -12,8 +13,8 @@ const {
   deprecate,
   set,
   debug,
-  getOwner
 } = Ember;
+
 const assign = emberAssign || merge;
 
 export default ObjectProxy.extend(Evented, {

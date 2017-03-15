@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import BaseStore from './base';
 import objectsAreEqual from '../utils/objects-are-equal';
+import getOwner from '../utils/getOwner';
 
 const {
   RSVP,
@@ -12,7 +13,6 @@ const {
   testing,
   isPresent,
   A,
-  getOwner,
   warn,
 } = Ember;
 
