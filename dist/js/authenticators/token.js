@@ -11,6 +11,8 @@ define('ember-auth/authenticators/token', ['exports', 'ember', './base', './../c
     tokenPropertyName: 'token',
     headers: {},
 
+    triggerOnRestore: true,
+
     init: function init() {
       this.serverTokenEndpoint = _configuration['default'].serverTokenEndpoint;
       this.identificationField = _configuration['default'].identificationField;

@@ -86,20 +86,28 @@ define('ember-auth/internal-session', ['exports', 'ember', './utils/getOwner'], 
         var authenticatorFactory = _ref.authenticator;
 
         if (authenticatorFactory) {
-          delete restoredContent.authenticated.authenticator;
-          var authenticator = _this3._lookupAuthenticator(authenticatorFactory);
-          return authenticator.restore(restoredContent.authenticated).then(function (content) {
-            _this3.set('content', restoredContent);
-            _this3._busy = false;
-            return _this3._setup(authenticatorFactory, content);
-          }, function (err) {
-            debug('The authenticator "' + authenticatorFactory + '" rejected to restore the session - invalidating…');
-            if (err) {
-              debug(err);
-            }
-            _this3._busy = false;
-            return _this3._clearWithContent(restoredContent).then(reject, reject);
-          });
+          var _ret = (function () {
+            delete restoredContent.authenticated.authenticator;
+            var authenticator = _this3._lookupAuthenticator(authenticatorFactory);
+            return {
+              v: authenticator.restore(restoredContent.authenticated).then(function (content) {
+                _this3.set('content', restoredContent);
+                _this3._busy = false;
+                var setupRes = _this3._setup(authenticatorFactory, content, !!authenticator.triggerOnRestore);
+                _this3.trigger('restorationSucceeded');
+                return setupRes;
+              }, function (err) {
+                debug('The authenticator "' + authenticatorFactory + '" rejected to restore the session - invalidating…');
+                if (err) {
+                  debug(err);
+                }
+                _this3._busy = false;
+                return _this3._clearWithContent(restoredContent).then(reject, reject);
+              })
+            };
+          })();
+
+          if (typeof _ret === 'object') return _ret.v;
         } else {
           delete (restoredContent || {}).authenticated;
           _this3._busy = false;
