@@ -38,11 +38,11 @@ export default BaseAuthenticator.extend({
     return new Promise((resolve, reject) => {
       const data = this.getAuthenticateData(credentials);
 
-      this.makeRequest(data, headers)
-      .then((response) => {
+      this.makeRequest(data, headers).then(
+      (response) => {
         run(null, resolve, this.getResponseData(response));
-      })
-      .catch((xhr) => {
+      },
+      (xhr) => {
         run(null, reject, xhr.responseJSON || xhr.responseText);
       });
     });

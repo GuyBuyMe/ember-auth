@@ -41,7 +41,7 @@ define('ember-auth/authenticators/token', ['exports', 'ember', './base', './../c
 
         _this2.makeRequest(data, headers).then(function (response) {
           run(null, resolve, _this2.getResponseData(response));
-        })['catch'](function (xhr) {
+        }, function (xhr) {
           run(null, reject, xhr.responseJSON || xhr.responseText);
         });
       });
