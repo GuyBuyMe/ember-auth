@@ -132,7 +132,7 @@ define('ember-auth/services/session', ['exports', 'ember', '../utils/getOwner'],
       var _this = this,
           _arguments = arguments;
 
-      A(['authenticationSucceeded', 'invalidationSucceeded']).forEach(function (event) {
+      A(['authenticationSucceeded', 'invalidationSucceeded', 'restorationSucceeded']).forEach(function (event) {
         var session = _this.get('session');
         // the internal session won't be available in route unit tests
         if (session) {

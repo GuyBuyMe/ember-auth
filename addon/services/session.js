@@ -132,7 +132,8 @@ export default Service.extend(Evented, {
   _forwardSessionEvents() {
     A([
       'authenticationSucceeded',
-      'invalidationSucceeded'
+      'invalidationSucceeded',
+      'restorationSucceeded'
     ]).forEach((event) => {
       const session = this.get('session');
       // the internal session won't be available in route unit tests
