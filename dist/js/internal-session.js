@@ -1,4 +1,4 @@
-define('ember-auth/internal-session', ['exports', 'ember', './../utils/getOwner'], function (exports, _ember, _utilsGetOwner) {
+define('ember-auth/internal-session', ['exports', 'ember', './utils/getOwner'], function (exports, _ember, _utilsGetOwner) {
   'use strict';
 
   var _slice = Array.prototype.slice;

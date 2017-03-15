@@ -1,6 +1,8 @@
 define('ember-auth/authenticators/token', ['exports', 'ember', './base', './../configuration'], function (exports, _ember, _base, _configuration) {
   'use strict';
 
+  var Promise = _ember['default'].RSVP.Promise;
+  var run = _ember['default'].run;
   exports['default'] = _base['default'].extend({
 
     serverTokenEndpoint: '/api/token-auth/',
@@ -34,17 +36,13 @@ define('ember-auth/authenticators/token', ['exports', 'ember', './base', './../c
     authenticate: function authenticate(credentials, headers) {
       var _this2 = this;
 
-      return new _ember['default'].RSVP.Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         var data = _this2.getAuthenticateData(credentials);
 
         _this2.makeRequest(data, headers).then(function (response) {
-          _ember['default'].run(function () {
-            resolve(_this2.getResponseData(response));
-          });
-        }, function (xhr) {
-          _ember['default'].run(function () {
-            reject(xhr.responseJSON || xhr.responseText);
-          });
+          run(null, resolve, _this2.getResponseData(response));
+        })['catch'](function (xhr) {
+          run(null, reject, xhr.responseJSON || xhr.responseText);
         });
       });
     },

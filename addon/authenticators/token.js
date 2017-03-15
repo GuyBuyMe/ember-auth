@@ -2,6 +2,9 @@ import Ember from 'ember';
 import BaseAuthenticator from './base';
 import Configuration from './../configuration';
 
+const { RSVP: { Promise }, run } = Ember;
+
+
 export default BaseAuthenticator.extend({
 
   serverTokenEndpoint: '/api/token-auth/',
@@ -32,15 +35,15 @@ export default BaseAuthenticator.extend({
   },
 
   authenticate(credentials, headers) {
-    return new Ember.RSVP.Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const data = this.getAuthenticateData(credentials);
 
-      this.makeRequest(data, headers).then(response => {
-        Ember.run(() => {
-          resolve(this.getResponseData(response));
-        });
-      }, xhr => {
-        Ember.run(() => { reject(xhr.responseJSON || xhr.responseText); });
+      this.makeRequest(data, headers)
+      .then((response) => {
+        run(null, resolve, this.getResponseData(response));
+      })
+      .catch((xhr) => {
+        run(null, reject, xhr.responseJSON || xhr.responseText);
       });
     });
   },

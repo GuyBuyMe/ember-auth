@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import getOwner from './../utils/getOwner';
+import getOwner from './utils/getOwner';
 
 const {
   RSVP,
