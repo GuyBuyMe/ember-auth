@@ -13,6 +13,7 @@ export default BaseAuthenticator.extend({
   tokenPropertyName: 'token',
   headers: {},
 
+  triggerOnRestore: true,
 
   init() {
     this.serverTokenEndpoint = Configuration.serverTokenEndpoint;
