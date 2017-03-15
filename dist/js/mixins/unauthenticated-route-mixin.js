@@ -1,11 +1,10 @@
-define('ember-auth/mixins/unauthenticated-route-mixin', ['exports', 'ember', './../configuration'], function (exports, _ember, _configuration) {
+define('ember-auth/mixins/unauthenticated-route-mixin', ['exports', 'ember', './../configuration', '../utils/getOwner'], function (exports, _ember, _configuration, _utilsGetOwner) {
   'use strict';
 
   var service = _ember['default'].inject.service;
   var Mixin = _ember['default'].Mixin;
   var assert = _ember['default'].assert;
   var computed = _ember['default'].computed;
-  var getOwner = _ember['default'].getOwner;
 
   /**
     __This mixin is used to make routes accessible only if the session is
@@ -38,7 +37,7 @@ define('ember-auth/mixins/unauthenticated-route-mixin', ['exports', 'ember', './
     session: service('session'),
 
     _isFastBoot: computed(function () {
-      var fastboot = getOwner(this).lookup('service:fastboot');
+      var fastboot = _utilsGetOwner['default'](this).lookup('service:fastboot');
 
       return fastboot ? fastboot.get('isFastBoot') : false;
     }),

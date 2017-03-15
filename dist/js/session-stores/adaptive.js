@@ -1,10 +1,9 @@
-define('ember-auth/session-stores/adaptive', ['exports', 'ember', 'ember-simple-auth/session-stores/base', 'ember-simple-auth/session-stores/local-storage', 'ember-simple-auth/session-stores/cookie'], function (exports, _ember, _emberSimpleAuthSessionStoresBase, _emberSimpleAuthSessionStoresLocalStorage, _emberSimpleAuthSessionStoresCookie) {
+define('ember-auth/session-stores/adaptive', ['exports', 'ember', 'ember-auth/session-stores/base', 'ember-auth/session-stores/local-storage', 'ember-auth/session-stores/cookie', 'ember-auth/getOwner'], function (exports, _ember, _emberAuthSessionStoresBase, _emberAuthSessionStoresLocalStorage, _emberAuthSessionStoresCookie, _emberAuthGetOwner) {
   /* global localStorage */
   'use strict';
 
   var computed = _ember['default'].computed;
   var service = _ember['default'].inject.service;
-  var getOwner = _ember['default'].getOwner;
 
   var LOCAL_STORAGE_TEST_KEY = '_ember_simple_auth_test_key';
 
@@ -42,7 +41,7 @@ define('ember-auth/session-stores/adaptive', ['exports', 'ember', 'ember-simple-
     @extends BaseStore
     @public
   */
-  exports['default'] = _emberSimpleAuthSessionStoresBase['default'].extend({
+  exports['default'] = _emberAuthSessionStoresBase['default'].extend({
     /**
       The `localStorage` key the store persists data in if `localStorage` is
       available.
@@ -101,7 +100,7 @@ define('ember-auth/session-stores/adaptive', ['exports', 'ember', 'ember-simple-
     _cookies: service('cookies'),
 
     _fastboot: computed(function () {
-      var owner = getOwner(this);
+      var owner = _emberAuthGetOwner['default'](this);
 
       return owner && owner.lookup('service:fastboot');
     }),
@@ -123,12 +122,12 @@ define('ember-auth/session-stores/adaptive', ['exports', 'ember', 'ember-simple-
       if (this.get('_isLocalStorageAvailable')) {
         var options = { key: this.get('localStorageKey') };
         options._isFastBoot = false;
-        store = this._createStore(_emberSimpleAuthSessionStoresLocalStorage['default'], options);
+        store = this._createStore(_emberAuthSessionStoresLocalStorage['default'], options);
       } else {
         var options = this.getProperties('cookieDomain', 'cookieName', 'cookieExpirationTime', 'cookiePath');
         options._fastboot = this.get('_fastboot');
         options._cookies = this.get('_cookies');
-        store = this._createStore(_emberSimpleAuthSessionStoresCookie['default'], options);
+        store = this._createStore(_emberAuthSessionStoresCookie['default'], options);
       }
       this.set('_store', store);
     },

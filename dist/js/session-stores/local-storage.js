@@ -1,11 +1,10 @@
-define('ember-auth/session-stores/local-storage', ['exports', 'ember', './base', '../utils/objects-are-equal'], function (exports, _ember, _base, _utilsObjectsAreEqual) {
+define('ember-auth/session-stores/local-storage', ['exports', 'ember', './base', '../utils/objects-are-equal', '../utils/getOwner'], function (exports, _ember, _base, _utilsObjectsAreEqual, _utilsGetOwner) {
   /* global localStorage */
   'use strict';
 
   var RSVP = _ember['default'].RSVP;
   var jQuery = _ember['default'].$;
   var computed = _ember['default'].computed;
-  var getOwner = _ember['default'].getOwner;
 
   /**
     Session store that persists data in the browser's `localStorage`.
@@ -28,7 +27,7 @@ define('ember-auth/session-stores/local-storage', ['exports', 'ember', './base',
   */
   exports['default'] = _base['default'].extend({
     _isFastBoot: computed(function () {
-      var fastboot = getOwner(this).lookup('service:fastboot');
+      var fastboot = _utilsGetOwner['default'](this).lookup('service:fastboot');
 
       return fastboot ? fastboot.get('isFastBoot') : false;
     }),

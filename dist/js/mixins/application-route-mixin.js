@@ -1,4 +1,4 @@
-define('ember-auth/mixins/application-route-mixin', ['exports', 'ember', './../configuration'], function (exports, _ember, _configuration) {
+define('ember-auth/mixins/application-route-mixin', ['exports', 'ember', './../configuration', './../utils/getOwner'], function (exports, _ember, _configuration, _utilsGetOwner) {
   'use strict';
 
   var inject = _ember['default'].inject;
@@ -7,7 +7,6 @@ define('ember-auth/mixins/application-route-mixin', ['exports', 'ember', './../c
   var bind = _ember['default'].run.bind;
   var testing = _ember['default'].testing;
   var computed = _ember['default'].computed;
-  var getOwner = _ember['default'].getOwner;
 
   /**
     The mixin for the application route, __defining methods that are called when
@@ -58,7 +57,7 @@ define('ember-auth/mixins/application-route-mixin', ['exports', 'ember', './../c
     session: inject.service('session'),
 
     _isFastBoot: computed(function () {
-      var fastboot = getOwner(this).lookup('service:fastboot');
+      var fastboot = _utilsGetOwner['default'](this).lookup('service:fastboot');
 
       return fastboot ? fastboot.get('isFastBoot') : false;
     }),
@@ -108,7 +107,7 @@ define('ember-auth/mixins/application-route-mixin', ['exports', 'ember', './../c
     */
     sessionAuthenticated: function sessionAuthenticated() {
       var attemptedTransition = this.get('session.attemptedTransition');
-      var cookies = getOwner(this).lookup('service:cookies');
+      var cookies = _utilsGetOwner['default'](this).lookup('service:cookies');
       var redirectTarget = cookies.read('ember_simple_auth-redirectTarget');
 
       if (attemptedTransition) {

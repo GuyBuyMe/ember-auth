@@ -1,4 +1,4 @@
-define('ember-auth/services/session', ['exports', 'ember'], function (exports, _ember) {
+define('ember-auth/services/session', ['exports', 'ember', '../utils/getOwner'], function (exports, _ember, _utilsGetOwner) {
   'use strict';
 
   var _slice = Array.prototype.slice;
@@ -9,7 +9,6 @@ define('ember-auth/services/session', ['exports', 'ember'], function (exports, _
   var A = _ember['default'].A;
   var Service = _ember['default'].Service;
   var Evented = _ember['default'].Evented;
-  var getOwner = _ember['default'].getOwner;
   var isNone = _ember['default'].isNone;
   var assert = _ember['default'].assert;
 
@@ -218,7 +217,7 @@ define('ember-auth/services/session', ['exports', 'ember'], function (exports, _
     */
     authorize: function authorize(authorizerFactory, block) {
       if (this.get('isAuthenticated')) {
-        var authorizer = getOwner(this).lookup(authorizerFactory);
+        var authorizer = _utilsGetOwner['default'](this).lookup(authorizerFactory);
         assert('No authorizer for factory ' + authorizerFactory + ' could be found!', !isNone(authorizer));
         var sessionData = this.get('data.authenticated');
         authorizer.authorize(sessionData, block);

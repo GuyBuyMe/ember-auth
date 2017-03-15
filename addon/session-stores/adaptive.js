@@ -5,7 +5,7 @@ import LocalStorage from 'ember-auth/session-stores/local-storage';
 import Cookie from 'ember-auth/session-stores/cookie';
 import getOwner from 'ember-auth/getOwner';
 
-const { computed, inject: { service }, getOwner } = Ember;
+const { computed, inject: { service } } = Ember;
 
 const LOCAL_STORAGE_TEST_KEY = '_ember_simple_auth_test_key';
 

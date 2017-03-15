@@ -1,4 +1,4 @@
-define('ember-auth/internal-session', ['exports', 'ember'], function (exports, _ember) {
+define('ember-auth/internal-session', ['exports', 'ember', './../utils/getOwner'], function (exports, _ember, _utilsGetOwner) {
   'use strict';
 
   var _slice = Array.prototype.slice;
@@ -13,7 +13,6 @@ define('ember-auth/internal-session', ['exports', 'ember'], function (exports, _
   var deprecate = _ember['default'].deprecate;
   var set = _ember['default'].set;
   var debug = _ember['default'].debug;
-  var getOwner = _ember['default'].getOwner;
 
   var assign = emberAssign || merge;
 
@@ -251,7 +250,7 @@ define('ember-auth/internal-session', ['exports', 'ember'], function (exports, _
     },
 
     _lookupAuthenticator: function _lookupAuthenticator(authenticator) {
-      return getOwner(this).lookup(authenticator);
+      return _utilsGetOwner['default'](this).lookup(authenticator);
     }
   });
 });

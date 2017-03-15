@@ -1,4 +1,4 @@
-define('ember-auth/session-stores/cookie', ['exports', 'ember', './base', '../utils/objects-are-equal'], function (exports, _ember, _base, _utilsObjectsAreEqual) {
+define('ember-auth/session-stores/cookie', ['exports', 'ember', './base', '../utils/objects-are-equal', '../utils/getOwner'], function (exports, _ember, _base, _utilsObjectsAreEqual, _utilsGetOwner) {
   'use strict';
 
   var RSVP = _ember['default'].RSVP;
@@ -14,7 +14,6 @@ define('ember-auth/session-stores/cookie', ['exports', 'ember', './base', '../ut
   var testing = _ember['default'].testing;
   var isPresent = _ember['default'].isPresent;
   var A = _ember['default'].A;
-  var getOwner = _ember['default'].getOwner;
   var warn = _ember['default'].warn;
 
   var persistingProperty = function persistingProperty() {
@@ -132,7 +131,7 @@ define('ember-auth/session-stores/cookie', ['exports', 'ember', './base', '../ut
     _cookies: service('cookies'),
 
     _fastboot: computed(function () {
-      var owner = getOwner(this);
+      var owner = _utilsGetOwner['default'](this);
 
       return owner && owner.lookup('service:fastboot');
     }),
