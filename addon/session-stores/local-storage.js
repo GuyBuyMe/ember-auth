@@ -40,7 +40,7 @@ export default BaseStore.extend({
     @default 'ember_simple_auth-session'
     @public
   */
-  key: ENV['ember-auth']['localStorageKey],
+  key: ENV['ember-auth']['localStorageKey'],
 
   init() {
     this._super(...arguments);
