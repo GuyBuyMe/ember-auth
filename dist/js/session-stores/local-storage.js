@@ -39,7 +39,7 @@ define('ember-auth/session-stores/local-storage', ['exports', 'ember', './base',
       @default 'ember_simple_auth-session'
       @public
     */
-    key: 'ember_simple_auth-session',
+    key:ENV["emberAuthLocalStorageKey"]?? 'ember_simple_auth-session',
 
     init: function init() {
       this._super.apply(this, arguments);
